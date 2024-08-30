@@ -12,6 +12,7 @@ struct CSTVApp: App {
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .preferredColorScheme(.dark)
         }
     }
 }
