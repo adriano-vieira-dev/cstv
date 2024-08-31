@@ -22,7 +22,7 @@ struct Match: Codable, Identifiable {
 
 // MARK: - League
 struct League: Codable {
-    let imageURL: String
+    let imageURL: String?
     let name: String
 
     enum CodingKeys: String, CodingKey {
@@ -38,12 +38,10 @@ struct OpponentElement: Codable {
 
 // MARK: - Opponent
 struct Opponent: Codable {
-    let acronym: String
-    let imageURL: String
+    let imageURL: String?
     let name: String
 
     enum CodingKeys: String, CodingKey {
-        case acronym
         case imageURL = "image_url"
         case name
     }

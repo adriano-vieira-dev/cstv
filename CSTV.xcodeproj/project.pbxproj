@@ -20,6 +20,7 @@
 		B9AD7F162C82A8FF006B2A73 /* CSTVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */; };
 		B9AD7F182C82AAAD006B2A73 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */; };
 		B9AD7F1B2C82B1F5006B2A73 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B9AD7F1A2C82B1F5006B2A73 /* SDWebImageSwiftUI */; };
+		B9AD7F1D2C82E60F006B2A73 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		B94C2AB52C822D3200D1A6CE /* PandaScoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PandaScoreService.swift; sourceTree = "<group>"; };
 		B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTVError.swift; sourceTree = "<group>"; };
 		B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				B92F59312C81769700179A3C /* View+Extensions.swift */,
 				B92F59332C81783D00179A3C /* Font+Extensions.swift */,
 				B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */,
+				B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B92F593B2C817E6C00179A3C /* RoundedCornerShape.swift in Sources */,
+				B9AD7F1D2C82E60F006B2A73 /* Date+Extensions.swift in Sources */,
 				B92F59342C81783D00179A3C /* Font+Extensions.swift in Sources */,
 				B92F591B2C8162DE00179A3C /* CSTVApp.swift in Sources */,
 				B94C2AB62C822D3200D1A6CE /* PandaScoreService.swift in Sources */,
@@ -366,7 +370,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CSTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PSDVSFLBHS;
+				DEVELOPMENT_TEAM = 77TGZN7HSL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CSTV/Info.plist;
@@ -396,7 +400,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CSTV/Preview Content\"";
-				DEVELOPMENT_TEAM = PSDVSFLBHS;
+				DEVELOPMENT_TEAM = 77TGZN7HSL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CSTV/Info.plist;

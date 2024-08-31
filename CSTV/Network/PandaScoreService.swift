@@ -27,6 +27,7 @@ class PandaScoreService {
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         let queryItems: [URLQueryItem] = [
 //            URLQueryItem(name: "filter[begin_at]", value: "2024-08-30T16%3A30%3A00Z"),
+            URLQueryItem(name: "filter[future]", value: "true"),
             URLQueryItem(name: "sort", value: "begin_at"),
             URLQueryItem(name: "page", value: "1"),
             URLQueryItem(name: "per_page", value: "5"),
@@ -51,6 +52,8 @@ class PandaScoreService {
                 return completion(.failure(CSTVError.noData))
             }
 
+//            print(String(decoding: data, as: UTF8.self))
+            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
