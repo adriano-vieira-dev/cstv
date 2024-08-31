@@ -5,6 +5,7 @@
 //  Created by Adriano Vieira on 30/08/24.
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct MatchListView: View {
@@ -39,9 +40,15 @@ struct MatchListView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
             HStack(spacing: 20) {
                 VStack(spacing: 10) {
-                    Circle()
-                        .frame(teamFrame)
-                    Text("Team 1")
+                    WebImage(url: URL(string: match.opponents.first?.opponent.imageURL ?? "")) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Circle()
+                    }
+                    .frame(teamFrame)
+                    Text(match.opponents.first?.opponent.name ?? "Team 1")
                         .font(.roboto(10))
                 }
 
@@ -50,9 +57,15 @@ struct MatchListView: View {
                     .foregroundStyle(.white.opacity(0.5))
 
                 VStack(spacing: 10) {
-                    Circle()
-                        .frame(teamFrame)
-                    Text("Team 2")
+                    WebImage(url: URL(string: match.opponents.last?.opponent.imageURL ?? "")) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        Circle()
+                    }
+                    .frame(teamFrame)
+                    Text(match.opponents.last?.opponent.name ?? "Team 2")
                         .font(.roboto(10))
                 }
             }
@@ -61,9 +74,15 @@ struct MatchListView: View {
             Divider()
 
             HStack {
-                Circle()
-                    .frame(seriesFrame)
-                Text("League + serie")
+                WebImage(url: URL(string: match.league.imageURL)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    Circle()
+                }
+                .frame(seriesFrame)
+                Text("\(match.league.name) - \(match.serie.name)")
                     .font(.roboto(8))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -93,14 +112,16 @@ struct MatchListView: View {
             alignment: .center
         )
     }
-    
+
     var listView: some View {
-        ScrollView {
+        List {
             ForEach(matches) { match in
                 matchRow(match)
             }
+            .listRowBackground(Color.clear)
         }
-        .contentMargins(24, for: .scrollContent)
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
     }
 
     var body: some View {
