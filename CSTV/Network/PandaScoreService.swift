@@ -17,20 +17,21 @@ class PandaScoreService {
     // Private initializer to ensure singleton
     private init() {}
 
-    func fetchMatches(completion: @escaping CompletionHandler<Matches>) {
+    func fetchMatches(
+        _ state: MatchState,
+        completion: @escaping CompletionHandler<Matches>
+    ) {
         guard let apiKey = ProcessInfo.processInfo.environment["PANDA_SCORE_API_KEY"] else {
             return completion(.failure(CSTVError.missingApiKey))
         }
 
-        let url = URL(string: "https://api.pandascore.co/csgo/matches")!
+        let url = URL(string: "https://api.pandascore.co/csgo/matches/\(state)")!
 
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         let queryItems: [URLQueryItem] = [
-//            URLQueryItem(name: "filter[begin_at]", value: "2024-08-30T16%3A30%3A00Z"),
-            URLQueryItem(name: "filter[future]", value: "true"),
             URLQueryItem(name: "sort", value: "begin_at"),
             URLQueryItem(name: "page", value: "1"),
-            URLQueryItem(name: "per_page", value: "5"),
+            URLQueryItem(name: "per_page", value: "20"),
         ]
         components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
 
@@ -44,16 +45,12 @@ class PandaScoreService {
         ]
 
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error {
-                return completion(.failure(error))
-            }
+            if let error { return completion(.failure(error)) }
 
-            guard let data else {
-                return completion(.failure(CSTVError.noData))
-            }
+            guard let data else { return completion(.failure(CSTVError.noData)) }
 
 //            print(String(decoding: data, as: UTF8.self))
-            
+
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 

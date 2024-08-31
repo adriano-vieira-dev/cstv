@@ -21,6 +21,8 @@
 		B9AD7F182C82AAAD006B2A73 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */; };
 		B9AD7F1B2C82B1F5006B2A73 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B9AD7F1A2C82B1F5006B2A73 /* SDWebImageSwiftUI */; };
 		B9AD7F1D2C82E60F006B2A73 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */; };
+		B9AD7F1E2C831CBF006B2A73 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B92F59362C81793500179A3C /* Roboto-Regular.ttf */; };
+		B9AD7F1F2C831CC3006B2A73 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B92F59372C81793500179A3C /* Roboto-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -214,7 +216,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9AD7F1E2C831CBF006B2A73 /* Roboto-Regular.ttf in Resources */,
 				B92F59222C8162E000179A3C /* Preview Assets.xcassets in Resources */,
+				B9AD7F1F2C831CC3006B2A73 /* Roboto-Bold.ttf in Resources */,
 				B92F591F2C8162E000179A3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

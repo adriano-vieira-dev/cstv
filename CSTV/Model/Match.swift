@@ -5,6 +5,11 @@
 
 import Foundation
 
+enum MatchState: String {
+    case running
+    case upcoming
+}
+
 // MARK: - Match
 struct Match: Codable, Identifiable {
     let id: Int

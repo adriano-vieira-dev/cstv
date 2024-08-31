@@ -9,43 +9,29 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct MatchListView: View {
-    @State private var matches: Matches = [
-        Match(
-            id: 1,
-            beginAt: Date(fromISO8601String: "2024-08-31T08:00:00Z")!,
-            opponents: [
-                OpponentElement(
-                    opponent: Opponent(
-                        imageURL: "https://cdn.pandascore.co/images/team/image/135381/157px_betclic_apogee_esports_darkmode.png",
-                        name: "Apogee Esports"
-                    )
-                ),
-                OpponentElement(
-                    opponent: Opponent(
-                        imageURL: "https://cdn.pandascore.co/images/team/image/131389/900px_ence_academy_dec_2023_allmode.png",
-                        name: "ENCE Academy"
-                    )
-                ),
-            ],
-            serie: Serie(name: "Division 2"),
-            league: League(
-                imageURL: "https://cdn.pandascore.co/images/league/image/4854/799px-european_pro_league_2023_lightmode-png",
-                name: "European Pro League"
-            )
-        ),
-    ]
+    @State private var runningMatches: Matches = []
+    @State private var upcomingMatches: Matches = []
     @State private var error: Error? = nil
     @State private var loading: Bool = false
+    
+    var allMatches: Matches {
+        runningMatches + upcomingMatches
+    }
 
-    func fetchMatches() {
+    func fetchMatches(_ state: MatchState) {
         loading = true
-        PandaScoreService.shared.fetchMatches { result in
+        PandaScoreService.shared.fetchMatches(state) { result in
             self.loading = false
             switch result {
             case let .failure(error):
                 self.error = error
             case let .success(matches):
-                self.matches = matches
+                switch state {
+                case .running:
+                    self.runningMatches = matches
+                case .upcoming:
+                    self.upcomingMatches = matches
+                }
             }
         }
     }
@@ -61,7 +47,8 @@ struct MatchListView: View {
 
     var emptyState: some View {
         Button("Get Matches") {
-            fetchMatches()
+            fetchMatches(.running)
+            fetchMatches(.upcoming)
         }
         .frame(
             maxWidth: .infinity,
@@ -72,7 +59,7 @@ struct MatchListView: View {
 
     var listView: some View {
         List {
-            ForEach(matches) { match in
+            ForEach(allMatches) { match in
                 MatchRow(match: match)
             }
             .listRowBackground(Color.clear)
@@ -87,7 +74,7 @@ struct MatchListView: View {
             Group {
                 if loading {
                     loadingState
-                } else if matches.isEmpty {
+                } else if allMatches.isEmpty {
                     emptyState
                 } else {
                     listView
