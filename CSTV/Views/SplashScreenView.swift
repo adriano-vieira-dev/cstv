@@ -11,7 +11,7 @@ struct SplashScreenView: View {
     @State private var showSplash = true
     
     // Given time to keep the fuze logo on screen
-    let SPLASH_SCREEN_TIME = 2
+    let SPLASH_SCREEN_TIME = 100
     
     var splash: some View {
         Image(.fuze)
@@ -35,7 +35,7 @@ struct SplashScreenView: View {
     }
     
     func onAppear() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(SPLASH_SCREEN_TIME)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(SPLASH_SCREEN_TIME)) {
             withAnimation {
                 showSplash = false
             }

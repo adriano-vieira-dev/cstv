@@ -16,6 +16,10 @@
 		B92F59322C81769700179A3C /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92F59312C81769700179A3C /* View+Extensions.swift */; };
 		B92F59342C81783D00179A3C /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92F59332C81783D00179A3C /* Font+Extensions.swift */; };
 		B92F593B2C817E6C00179A3C /* RoundedCornerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92F593A2C817E6C00179A3C /* RoundedCornerShape.swift */; };
+		B94C2AB62C822D3200D1A6CE /* PandaScoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94C2AB52C822D3200D1A6CE /* PandaScoreService.swift */; };
+		B9AD7F162C82A8FF006B2A73 /* CSTVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */; };
+		B9AD7F182C82AAAD006B2A73 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */; };
+		B9AD7F1B2C82B1F5006B2A73 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B9AD7F1A2C82B1F5006B2A73 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,9 @@
 		B92F59372C81793500179A3C /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B92F59382C81799500179A3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B92F593A2C817E6C00179A3C /* RoundedCornerShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerShape.swift; sourceTree = "<group>"; };
+		B94C2AB52C822D3200D1A6CE /* PandaScoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PandaScoreService.swift; sourceTree = "<group>"; };
+		B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTVError.swift; sourceTree = "<group>"; };
+		B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9AD7F1B2C82B1F5006B2A73 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,13 +72,14 @@
 		B92F59192C8162DE00179A3C /* CSTV */ = {
 			isa = PBXGroup;
 			children = (
+				B94C2AB42C822D0A00D1A6CE /* Network */,
 				B92F59392C817E4B00179A3C /* Utils */,
-				B92F59382C81799500179A3C /* Info.plist */,
 				B92F59352C81791E00179A3C /* Assets */,
 				B92F59302C81766D00179A3C /* Extensions */,
 				B92F592D2C81710E00179A3C /* Model */,
 				B92F59282C816E7700179A3C /* Views */,
 				B92F591A2C8162DE00179A3C /* CSTVApp.swift */,
+				B92F59382C81799500179A3C /* Info.plist */,
 				B92F591E2C8162E000179A3C /* Assets.xcassets */,
 				B92F59202C8162E000179A3C /* Preview Content */,
 			);
@@ -107,6 +116,7 @@
 			children = (
 				B92F59312C81769700179A3C /* View+Extensions.swift */,
 				B92F59332C81783D00179A3C /* Font+Extensions.swift */,
+				B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -124,8 +134,17 @@
 			isa = PBXGroup;
 			children = (
 				B92F593A2C817E6C00179A3C /* RoundedCornerShape.swift */,
+				B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		B94C2AB42C822D0A00D1A6CE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B94C2AB52C822D3200D1A6CE /* PandaScoreService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +163,9 @@
 			dependencies = (
 			);
 			name = CSTV;
+			packageProductDependencies = (
+				B9AD7F1A2C82B1F5006B2A73 /* SDWebImageSwiftUI */,
+			);
 			productName = CSTV;
 			productReference = B92F59172C8162DE00179A3C /* CSTV.app */;
 			productType = "com.apple.product-type.application";
@@ -172,6 +194,9 @@
 				Base,
 			);
 			mainGroup = B92F590E2C8162DE00179A3C;
+			packageReferences = (
+				B9AD7F192C82B1F5006B2A73 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = B92F59182C8162DE00179A3C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -201,6 +226,9 @@
 				B92F593B2C817E6C00179A3C /* RoundedCornerShape.swift in Sources */,
 				B92F59342C81783D00179A3C /* Font+Extensions.swift in Sources */,
 				B92F591B2C8162DE00179A3C /* CSTVApp.swift in Sources */,
+				B94C2AB62C822D3200D1A6CE /* PandaScoreService.swift in Sources */,
+				B9AD7F162C82A8FF006B2A73 /* CSTVError.swift in Sources */,
+				B9AD7F182C82AAAD006B2A73 /* Binding+Extensions.swift in Sources */,
 				B92F592C2C816EBD00179A3C /* MatchListView.swift in Sources */,
 				B92F592A2C816E9200179A3C /* SplashScreenView.swift in Sources */,
 				B92F59322C81769700179A3C /* View+Extensions.swift in Sources */,
@@ -412,6 +440,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B9AD7F192C82B1F5006B2A73 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B9AD7F1A2C82B1F5006B2A73 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B9AD7F192C82B1F5006B2A73 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B92F590F2C8162DE00179A3C /* Project object */;
 }
