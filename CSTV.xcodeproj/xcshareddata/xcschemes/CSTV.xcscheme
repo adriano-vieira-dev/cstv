@@ -53,7 +53,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "PANDA_SCORE_API_KEY"
-            value = "r0QOa10NGI1fXKwPLjkQjYeX2hVH17DPAF9i7CgyiowpKY6eOLI"
+            value = "add_your_panda_score_api_key_here"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
