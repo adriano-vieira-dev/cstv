@@ -7,7 +7,7 @@ struct Team: Codable {
     let players: [Player]
 }
 
-struct Player: Codable {
+struct Player: Codable, Identifiable {
     let id: Int
     let firstName: String?
     let imageURL: String?

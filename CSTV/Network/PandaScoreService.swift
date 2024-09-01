@@ -27,8 +27,6 @@ class PandaScoreService {
         }
 
         let url = URL(string: "https://api.pandascore.co/csgo/matches?filter[status]=running,not_started&sort=begin_at&page=\(page)&per_page=\(pageSize)")!
-        
-        print(url.absoluteString)
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -44,8 +42,6 @@ class PandaScoreService {
 
             guard let data else { return completion(.failure(CSTVError.noData)) }
 
-            print(String(decoding: data, as: UTF8.self))
-
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
@@ -59,7 +55,7 @@ class PandaScoreService {
         task.resume()
     }
     
-    func fetchTeam(
+    func fetchTeams(
         _ ids: [Int],
         completion: @escaping CompletionHandler<Teams>
     ) {
@@ -81,8 +77,6 @@ class PandaScoreService {
             if let error { return completion(.failure(error)) }
 
             guard let data else { return completion(.failure(CSTVError.noData)) }
-
-            print(String(decoding: data, as: UTF8.self))
 
             guard let teams = try? JSONDecoder().decode(Teams.self, from: data) else {
                 return completion(.failure(CSTVError.decodingError))

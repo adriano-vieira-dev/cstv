@@ -11,7 +11,7 @@ struct SplashScreenView: View {
     @State private var showSplash = true
     
     // Given time to keep the fuze logo on screen
-    let SPLASH_SCREEN_TIME = 100
+    let SPLASH_SCREEN_TIME = 2000
     
     var splash: some View {
         Image(.fuze)

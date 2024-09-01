@@ -130,13 +130,15 @@ struct MatchRow: View {
     }
 
     var cardHeader: some View {
-        Text(match.beginAt.relativeFormat())
-            .font(.roboto(8))
-            .fontWeight(.bold)
-            .padding(8)
-            .background(matchIsLive ? Color.live : Color.timeBadge.opacity(0.2))
-            .clipShape(RoundedCornerShape(corners: [.bottomLeft], radius: 16))
-            .frame(maxWidth: .infinity, alignment: .trailing)
+        TimelineView(.periodic(from: .now, by: 10)) { _ in
+            Text(match.beginAt.relativeFormat())
+                .font(.roboto(8))
+                .fontWeight(.bold)
+                .padding(8)
+                .background(matchIsLive ? Color.live : Color.timeBadge.opacity(0.2))
+                .clipShape(RoundedCornerShape(corners: [.bottomLeft], radius: 16))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
     }
 
     var cardContent: some View {
