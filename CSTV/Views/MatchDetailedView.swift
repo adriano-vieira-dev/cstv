@@ -73,7 +73,7 @@ struct MatchDetailedView: View {
                 )
         }
     }
-    
+
     @ViewBuilder
     func playerView(player: Player, firstTeam: Bool = true) -> some View {
         HStack(alignment: .bottom, spacing: 16) {
@@ -87,7 +87,7 @@ struct MatchDetailedView: View {
                     .foregroundColor(.fullname)
             }
             .offset(y: -5)
-            
+
             WebImage(url: URL(string: player.imageURL ?? "")) { image in
                 image
                     .resizable()
@@ -114,18 +114,32 @@ struct MatchDetailedView: View {
         )
         .environment(\.layoutDirection, firstTeam ? .leftToRight : .rightToLeft)
     }
-    
+
     var playersList: some View {
         HStack(alignment: .top) {
             if let firstTeam, let lastTeam {
                 VStack(spacing: 16) {
-                    ForEach(firstTeam.players) { player in
-                        playerView(player: player)
+                    if firstTeam.players.isEmpty {
+                        Label("Lista vazia", systemImage: "person.crop.circle.badge.questionmark")
+                            .font(.roboto(14))
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        ForEach(firstTeam.players) { player in
+                            playerView(player: player)
+                        }
                     }
                 }
                 VStack(spacing: 16) {
-                    ForEach(lastTeam.players) { player in
-                        playerView(player: player, firstTeam: false)
+                    if lastTeam.players.isEmpty {
+                        Label("Lista vazia", systemImage: "person.crop.circle.badge.questionmark")
+                            .font(.roboto(14))
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        ForEach(lastTeam.players) { player in
+                            playerView(player: player, firstTeam: false)
+                        }
                     }
                 }
             }
@@ -147,7 +161,7 @@ struct MatchDetailedView: View {
                 matchTeams
 
                 matchTime
-                
+
                 playersList
             }
             .frame(
