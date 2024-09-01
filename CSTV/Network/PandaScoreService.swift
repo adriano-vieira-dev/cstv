@@ -18,24 +18,19 @@ class PandaScoreService {
     private init() {}
 
     func fetchMatches(
-        _ state: MatchState,
+        page: Int,
+        pageSize: Int,
         completion: @escaping CompletionHandler<Matches>
     ) {
         guard let apiKey = ProcessInfo.processInfo.environment["PANDA_SCORE_API_KEY"] else {
             return completion(.failure(CSTVError.missingApiKey))
         }
 
-        let url = URL(string: "https://api.pandascore.co/csgo/matches/\(state)")!
+        let url = URL(string: "https://api.pandascore.co/csgo/matches?filter[status]=running,not_started&sort=begin_at&page=\(page)&per_page=\(pageSize)")!
+        
+        print(url.absoluteString)
 
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-        let queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "sort", value: "begin_at"),
-            URLQueryItem(name: "page", value: "1"),
-            URLQueryItem(name: "per_page", value: "20"),
-        ]
-        components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
-
-        var request = URLRequest(url: components.url!)
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = 10
 
@@ -49,7 +44,7 @@ class PandaScoreService {
 
             guard let data else { return completion(.failure(CSTVError.noData)) }
 
-//            print(String(decoding: data, as: UTF8.self))
+            print(String(decoding: data, as: UTF8.self))
 
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
@@ -63,4 +58,40 @@ class PandaScoreService {
 
         task.resume()
     }
+    
+    func fetchTeam(
+        _ ids: [Int],
+        completion: @escaping CompletionHandler<Teams>
+    ) {
+        guard let apiKey = ProcessInfo.processInfo.environment["PANDA_SCORE_API_KEY"] else {
+            return completion(.failure(CSTVError.missingApiKey))
+        }
+        
+        let url = URL(string: "https://api.pandascore.co/csgo/teams?filter[id]=\(ids.map { String($0) }.joined(separator: ","))")!
+        var request = URLRequest(url: url)
+
+        request.httpMethod = "GET"
+        request.timeoutInterval = 10
+        request.allHTTPHeaderFields = [
+            "accept": "application/json",
+            "authorization": "Bearer \(apiKey)",
+        ]
+
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error { return completion(.failure(error)) }
+
+            guard let data else { return completion(.failure(CSTVError.noData)) }
+
+            print(String(decoding: data, as: UTF8.self))
+
+            guard let teams = try? JSONDecoder().decode(Teams.self, from: data) else {
+                return completion(.failure(CSTVError.decodingError))
+            }
+
+            return completion(.success(teams))
+        }
+
+        task.resume()
+    }
+    
 }

@@ -23,6 +23,8 @@
 		B9AD7F1D2C82E60F006B2A73 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */; };
 		B9AD7F1E2C831CBF006B2A73 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B92F59362C81793500179A3C /* Roboto-Regular.ttf */; };
 		B9AD7F1F2C831CC3006B2A73 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B92F59372C81793500179A3C /* Roboto-Bold.ttf */; };
+		B9AD7F212C831E8A006B2A73 /* MatchDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F202C831E8A006B2A73 /* MatchDetailedView.swift */; };
+		B9AD7F232C832CA2006B2A73 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD7F222C832CA2006B2A73 /* Team.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		B9AD7F152C82A8FF006B2A73 /* CSTVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTVError.swift; sourceTree = "<group>"; };
 		B9AD7F172C82AAAD006B2A73 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		B9AD7F1C2C82E60F006B2A73 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		B9AD7F202C831E8A006B2A73 /* MatchDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailedView.swift; sourceTree = "<group>"; };
+		B9AD7F222C832CA2006B2A73 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			children = (
 				B92F59292C816E9200179A3C /* SplashScreenView.swift */,
 				B92F592B2C816EBD00179A3C /* MatchListView.swift */,
+				B9AD7F202C831E8A006B2A73 /* MatchDetailedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				B92F592E2C81712200179A3C /* Match.swift */,
+				B9AD7F222C832CA2006B2A73 /* Team.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,10 +238,12 @@
 			files = (
 				B92F593B2C817E6C00179A3C /* RoundedCornerShape.swift in Sources */,
 				B9AD7F1D2C82E60F006B2A73 /* Date+Extensions.swift in Sources */,
+				B9AD7F232C832CA2006B2A73 /* Team.swift in Sources */,
 				B92F59342C81783D00179A3C /* Font+Extensions.swift in Sources */,
 				B92F591B2C8162DE00179A3C /* CSTVApp.swift in Sources */,
 				B94C2AB62C822D3200D1A6CE /* PandaScoreService.swift in Sources */,
 				B9AD7F162C82A8FF006B2A73 /* CSTVError.swift in Sources */,
+				B9AD7F212C831E8A006B2A73 /* MatchDetailedView.swift in Sources */,
 				B9AD7F182C82AAAD006B2A73 /* Binding+Extensions.swift in Sources */,
 				B92F592C2C816EBD00179A3C /* MatchListView.swift in Sources */,
 				B92F592A2C816E9200179A3C /* SplashScreenView.swift in Sources */,

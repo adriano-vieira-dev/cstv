@@ -9,32 +9,15 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct MatchListView: View {
-    @State private var runningMatches: Matches = []
-    @State private var upcomingMatches: Matches = []
+    @State private var currentPage: Int = 0
+    @State private var matches: Matches = []
     @State private var error: Error? = nil
     @State private var loading: Bool = false
     
-    var allMatches: Matches {
-        runningMatches + upcomingMatches
-    }
-
-    func fetchMatches(_ state: MatchState) {
-        loading = true
-        PandaScoreService.shared.fetchMatches(state) { result in
-            self.loading = false
-            switch result {
-            case let .failure(error):
-                self.error = error
-            case let .success(matches):
-                switch state {
-                case .running:
-                    self.runningMatches = matches
-                case .upcoming:
-                    self.upcomingMatches = matches
-                }
-            }
-        }
-    }
+    @State private var selectedMatch: Match? = nil
+    
+    // Default pageSize is 20
+    let PAGE_SIZE = 20
 
     var loadingState: some View {
         ProgressView()
@@ -46,9 +29,11 @@ struct MatchListView: View {
     }
 
     var emptyState: some View {
-        Button("Get Matches") {
-            fetchMatches(.running)
-            fetchMatches(.upcoming)
+        VStack(spacing: 20) {
+            Label("Nenhuma partida encontrada", systemImage: "magnifyingglass")
+            Button("Tentar novamente") {
+                fetchMatches(page: 1)
+            }
         }
         .frame(
             maxWidth: .infinity,
@@ -59,26 +44,45 @@ struct MatchListView: View {
 
     var listView: some View {
         List {
-            ForEach(allMatches) { match in
+            ForEach(matches) { match in
                 MatchRow(match: match)
+                    .onTapGesture {
+                        selectedMatch = match
+                    }
+                    .onAppear {
+                        if match.id == matches.last?.id {
+                            fetchMatches()
+                        }
+                    }
             }
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
         }
+        .refreshable {
+            fetchMatches(page: 1)
+        }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
+        .navigationDestination(isPresented: Binding(value: $selectedMatch)) {
+            if let selectedMatch {
+                MatchDetailedView(match: selectedMatch)
+            }
+        }
     }
 
     var body: some View {
         NavigationStack {
             Group {
-                if loading {
-                    loadingState
-                } else if allMatches.isEmpty {
-                    emptyState
-                } else {
+                if !matches.isEmpty {
                     listView
+                } else if loading {
+                    loadingState
+                } else {
+                    emptyState
                 }
+            }
+            .onAppear {
+                fetchMatches(page: 1)
             }
             .alert(
                 error?.localizedDescription ?? "Error",
@@ -86,6 +90,31 @@ struct MatchListView: View {
             ) {}
             .background(Color.background)
             .navigationTitle("Partidas")
+        }
+    }
+    
+    func fetchMatches(page: Int? = nil) {
+        if let page {
+            currentPage = page
+        } else {
+            currentPage += 1
+        }
+        loading = true
+        PandaScoreService.shared.fetchMatches(
+            page: currentPage,
+            pageSize: PAGE_SIZE
+        ) { result in
+            self.loading = false
+            switch result {
+            case let .failure(error):
+                self.error = error
+            case let .success(matches):
+                if page != nil {
+                    self.matches = matches
+                } else {
+                    self.matches.append(contentsOf: matches)
+                }
+            }
         }
     }
 }
@@ -124,6 +153,7 @@ struct MatchRow: View {
                 Text(match.opponents.first?.opponent.name ?? "Team 1")
                     .font(.roboto(10))
             }
+            .frame(maxWidth: .infinity)
 
             Text("vs")
                 .font(.roboto(12))
@@ -141,8 +171,10 @@ struct MatchRow: View {
                 Text(match.opponents.last?.opponent.name ?? "Team 2")
                     .font(.roboto(10))
             }
+            .frame(maxWidth: .infinity)
         }
         .padding(.vertical, 18.5)
+        .padding(.horizontal, 20)
     }
 
     var cardFooter: some View {
@@ -155,7 +187,7 @@ struct MatchRow: View {
                 Circle()
             }
             .frame(seriesFrame)
-            Text("\(match.league.name) - \(match.serie.name)")
+            Text(match.fullSerieName)
                 .font(.roboto(8))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

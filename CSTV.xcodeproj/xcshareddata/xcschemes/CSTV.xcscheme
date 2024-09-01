@@ -50,12 +50,6 @@
             ReferencedContainer = "container:CSTV.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "IDEPreferLogStreaming=YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "PANDA_SCORE_API_KEY"
